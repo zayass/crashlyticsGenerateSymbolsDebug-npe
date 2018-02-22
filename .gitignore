@@ -1,0 +1,12 @@
+*.iml
+.gradle
+/local.properties
+.idea/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+jniLibs
+fabric.properties
+app/src/main/jniLibs
+app/src/main/swift

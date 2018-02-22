@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.readdle.sample.crashlytics.generatesymbolssample"
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+    defaultConfig {
+        multiDexEnabled true
+        ndk {
+            abiFilter 'armeabi-v7a'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            packagingOptions {
+                doNotStrip "**/*.so"
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true
+    }
+    compile('com.crashlytics.sdk.android:crashlytics-ndk:2.0.1@aar') {
+        transitive = true
+    }
+}
+
+crashlytics {
+    enableNdk true
+    androidNdkOut 'src/main/jniLibs'
+    androidNdkLibsOut 'src/main/jniLibs'
+}
